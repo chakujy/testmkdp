@@ -1,4 +1,4 @@
-$enrolScriptUrl = "https://intunemakdap.blob.core.windows.net/autopilot/enrol.ps1?sv=2023-01-03&st=2024-08-03T04%3A08%3A06Z&se=2025-08-04T04%3A08%3A00Z&sr=b&sp=r&sig=f8LsLUOfdyCDO1ZQVRRznlajEWcxzpWpiuNdWfB8SiM%3D"
+$enrolScriptUrl = "https://intunemakdap.blob.core.windows.net/autopilot/enrol.ps1"
 $groupTags = @("None", "WIN-32BIT-APPS", "WIN-64BIT-APPS")
 $defaultGroupTag = "WIN-32BIT-APPS"
 
@@ -169,4 +169,5 @@ finally
     Start-Sleep -Seconds 5
 
     Exit $exitCode
+
 }
