@@ -111,39 +111,7 @@ try
 
     $userName = Get-Process -IncludeUserName -Name explorer -ErrorAction SilentlyContinue | Select-Object -ExpandProperty UserName
 
-    if ($userName)
-    {
-        $choice = Start-Process -FilePath choice -ArgumentList "/C YN /M `"Force a full Windows Updates refresh (excluding drivers)? `" /T 10 /D Y" -Wait -PassThru -NoNewWindow
 
-        if ($choice.ExitCode -eq 1)
-        {
-            Write-Host "Running as $userName"
-
-            Install-Module -Name PSWindowsUpdate -Force -AllowClobber
-
-            Write-Host "Installed PSWindowsUpdate"
-
-            try
-            {
-                Write-Host "Installing windows updates ... "
-                Install-WindowsUpdate -AcceptAll -IgnoreReboot -Verbose -NotCategory "Drivers" -MicrosoftUpdate | Out-File "$logFolder\windows_updates_pre_esp.log" -Append
-                $exitCode = 1
-            }
-            catch {
-                Write-Warning "Failed to process windows updates"
-                Write-Warning $_
-                Write-Warning $_.ScriptStackTrace  
-            }
-            finally {
-                $stopwatch.Stop()
-                Write-Host "Windows update processing took $([Math]::Floor($stopwatch.Elapsed.TotalMinutes)) minutes"
-            }
-        }
-    }
-    else 
-    {
-        Write-Warning "Running non-interactively, can not process windows updates now ..."
-    }
 
     if ($registerDevice -and $stopwatch.Elapsed.TotalMinutes -lt 10) 
     {
@@ -169,5 +137,4 @@ finally
     Start-Sleep -Seconds 5
 
     Exit $exitCode
-
 }
