@@ -1,6 +1,6 @@
 $enrolScriptUrl = "https://intunemakdap.blob.core.windows.net/autopilot/enrol.ps1"
 $groupTags = @("None", "WIN-32BIT-APPS", "WIN-64BIT-APPS")
-$defaultGroupTag = "WIN-32BIT-APPS"
+$defaultGroupTag = "VMTEST"
 
 $exitCode = 0
 
@@ -138,3 +138,4 @@ finally
 
     Exit $exitCode
 }
+
